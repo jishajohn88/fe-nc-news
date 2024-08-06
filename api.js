@@ -16,4 +16,10 @@ const getArticleById = (article_id) => {
     })
 }
 
-export {getArticlesByCreateDate,getArticleById};
+const getCommentsByArticleId = (article_id) => {
+    return api.get(`articles/${article_id}/comments`).then(({data}) => {
+        return data.comments
+    })
+}
+
+export {getArticlesByCreateDate,getArticleById,getCommentsByArticleId};
