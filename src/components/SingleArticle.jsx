@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getArticleById } from "../../api";
+import { Link, useParams } from "react-router-dom";
+import { getArticleById, getCommentsByArticleId } from "../../api";
 import Loading from "./Loading";
 import moment from "moment";
+import ScrollToTop from "react-scroll-to-top";
+import CommentCard from "./CommentCard";
+import Expandable from "./Expandable";
 
 const SingleArticle = () => {
   const [singleArticle, setSingleArticle] = useState({});
   const { article_id } = useParams();
   const [isLoading, setisLoading] = useState(true);
+  const [isShowing, setisShowing] = useState(false);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     setisLoading(true);
@@ -17,6 +22,22 @@ const SingleArticle = () => {
     });
   }, [article_id]);
 
+  function handleViewComments() {
+    setisShowing(!isShowing);
+    getCommentsByArticleId(article_id).then((comments) => {
+      setComments(comments);
+    });
+  }
+
+  //   if (isShowing) {
+  //     return (
+  //       <>
+  //         {comments.map((comment) => {
+  //           return <CommentCard key={comment.comment_id} comment={comment} />;
+  //         })}
+  //       </>
+  //     );
+  //   }
   if (isLoading) {
     return <Loading />;
   } else {
@@ -35,16 +56,32 @@ const SingleArticle = () => {
             <h4 className="single-article-topic">{singleArticle.topic}</h4>
             <p>{singleArticle.body}</p>
             <h5>
-              <button className="up-arrow">{String.fromCharCode(8593)}</button> Votes 
-              <button className="down-arrow">{String.fromCharCode(8595)}</button>
+              <button className="up-arrow">{String.fromCharCode(8593)}</button>{" "}
+              Votes
+              <button className="down-arrow">
+                {String.fromCharCode(8595)}
+              </button>
             </h5>
-            <h5>Total Comments : {singleArticle.comment_count}</h5>
-            </article>
-            <article className="single-article-buttons">
-           
-            <button className="view-comments">View Comments</button>
-            <button className="post-comment">Post comment to the article</button>
-            </article>
+            <h5>Comments : {singleArticle.comment_count}</h5>
+          </article>
+          <article className="single-article-buttons">
+            <button className="view-comments" onClick={handleViewComments}>
+              {isShowing ? "Hide" : "View"} Comments
+            </button>
+            <button className="post-comment">
+              Post comment to the article
+            </button>
+          </article>
+          <Expandable isShowing={isShowing}>
+            <section className="comments-container">
+              {comments.map((comment) => {
+                return (
+                  <CommentCard key={comment.comment_id} comment={comment} />
+                );
+              })}
+            </section>
+          </Expandable>
+          <ScrollToTop smooth />
         </section>
       </>
     );
