@@ -7,7 +7,6 @@ import SingleArticle from './components/SingleArticle'
 
 function App() {
 
-
   return (
     <section className="article-container">
     <Header/>
