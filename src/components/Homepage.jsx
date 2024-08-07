@@ -9,7 +9,6 @@ const Homepage = () => {
 
   useEffect(() => {
     getArticlesByCreateDate().then((article) => {
-      console.log(article);
       setArticles(article);
       setisLoading(false);
     });

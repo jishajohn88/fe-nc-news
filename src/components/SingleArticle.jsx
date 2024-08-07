@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId } from "../../api";
 import Loading from "./Loading";
 import moment from "moment";
 import ScrollToTop from "react-scroll-to-top";
 import CommentCard from "./CommentCard";
 import Expandable from "./Expandable";
+import VoteHandler from "./VoteHandler";
 
 const SingleArticle = () => {
   const [singleArticle, setSingleArticle] = useState({});
@@ -22,22 +23,16 @@ const SingleArticle = () => {
     });
   }, [article_id]);
 
-  function handleViewComments() {
+  function handleViewComments(event) {
+    event.preventDefault();
     setisShowing(!isShowing);
+    setisLoading(true);
     getCommentsByArticleId(article_id).then((comments) => {
       setComments(comments);
+      setisLoading(false);
     });
   }
 
-  //   if (isShowing) {
-  //     return (
-  //       <>
-  //         {comments.map((comment) => {
-  //           return <CommentCard key={comment.comment_id} comment={comment} />;
-  //         })}
-  //       </>
-  //     );
-  //   }
   if (isLoading) {
     return <Loading />;
   } else {
@@ -56,11 +51,7 @@ const SingleArticle = () => {
             <h4 className="single-article-topic">{singleArticle.topic}</h4>
             <p>{singleArticle.body}</p>
             <h5>
-              <button className="up-arrow">{String.fromCharCode(8593)}</button>{" "}
-              Votes
-              <button className="down-arrow">
-                {String.fromCharCode(8595)}
-              </button>
+              <VoteHandler singleArticle={singleArticle} />
             </h5>
             <h5>Comments : {singleArticle.comment_count}</h5>
           </article>
