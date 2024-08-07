@@ -132,3 +132,82 @@ h5 {
   padding: 5px;
   color: #f7f7f2;
 }
+.login-form {
+  display: flex;
+  border: 1px solid #f8fcee;
+  box-shadow: 5px 5px 5px #eee5e9;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-size: x-large;
+  height: 350px;
+  width: 400px;
+  justify-content: center;
+  margin: auto;
+  input {
+    padding: 20px;
+    border-radius: 6px;
+  }
+  button {
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: #9dc0bc;
+    color: #333333;
+    border: none;
+    font-size: large;
+  }
+}
+.vote-success,
+.vote-unsuccess{
+  margin-top: 10px;
+  width: 300px;
+  background-color: #d5d6aa;
+  color: #333333;
+  font-size: medium;
+}
+.post-form {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+  padding: 30px;
+  font-size: x-large;
+  grid-gap: 6px;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  max-width: 40vw;
+  margin: auto;
+  input {
+    width: 20vw;
+    height: 7vh;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding-left: 20px;
+    color: white;
+  }
+  textarea {
+    width: 20vw;
+    height: 10vw;
+    padding: 20px;
+  }
+  button {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    grid-column-start: 2;
+    width: 10vw;
+    font-size: medium;
+    font-weight: bolder;
+    cursor: pointer;
+  }
+}
+.comment-success {
+  text-align: center;
+  font-size: x-large;
+}
+.comments-container {
+  width:-webkit-fill-available;
+}

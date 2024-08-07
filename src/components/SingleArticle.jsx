@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId } from "../../api";
 import Loading from "./Loading";
 import moment from "moment";
@@ -14,6 +14,7 @@ const SingleArticle = () => {
   const [isLoading, setisLoading] = useState(true);
   const [isShowing, setisShowing] = useState(false);
   const [comments, setComments] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setisLoading(true);
@@ -31,6 +32,9 @@ const SingleArticle = () => {
       setComments(comments);
       setisLoading(false);
     });
+  }
+  function handlePostComment() {
+    navigate("/login", { state: article_id });
   }
 
   if (isLoading) {
@@ -59,8 +63,8 @@ const SingleArticle = () => {
             <button className="view-comments" onClick={handleViewComments}>
               {isShowing ? "Hide" : "View"} Comments
             </button>
-            <button className="post-comment">
-              Post comment to the article
+            <button className="post-comment" onClick={handlePostComment}>
+              Add a comment
             </button>
           </article>
           <Expandable isShowing={isShowing}>

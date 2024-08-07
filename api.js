@@ -30,10 +30,21 @@ const updateArticleByDecrementVotes = (article_id) => {
   return api.patch(`articles/${article_id}`,{inc_votes : -1})
 }
 
+const getUsers = () => {
+  return api.get(`/users`).then(({data})=>{
+    return data.users
+  })
+}
+
+const postComment = (newComment,article_id) => {
+  return api.post(`articles/${article_id}/comments`,newComment)
+}
 export {
   getArticlesByCreateDate,
   getArticleById,
   getCommentsByArticleId,
   updateArticleByIncrementVotes,
-  updateArticleByDecrementVotes
+  updateArticleByDecrementVotes,
+  getUsers,
+  postComment
 };
