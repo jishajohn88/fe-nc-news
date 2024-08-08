@@ -10,6 +10,7 @@ import Topics from "./components/Topics";
 import ArticlesByTopic from "./components/ArticlesByTopic";
 
 function App() {
+
   return (
     <section className="article-container">
       <Header />

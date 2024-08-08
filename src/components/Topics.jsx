@@ -10,28 +10,31 @@ const Topics = () => {
   useEffect(() => {
     setIsLoading(true);
     getTopics().then((data) => {
-        setTopicsList(data)
-        setIsLoading(false)
+      setTopicsList(data);
+      setIsLoading(false);
     });
-  },[]);
+  }, []);
 
   if (isLoading) {
     return <Loading />;
   } else {
-    return( 
-    <>
-    <section className="topics-list">
-        <ul>
-           {topicsList.map((topic) => {
-            return (
+    return (
+      <>
+        <section className="topics-list">
+          <ul>
+            {topicsList.map((topic) => {
+              return (
                 <li key={topic.slug}>
-                    <Link to={`/articles?topic=${topic.slug}`}><button>{(topic.slug).toUpperCase()}</button>
-                    </Link></li>
-            )
-           })}
-        </ul>
-    </section>
-    </>)
+                  <Link to={`/articles?topic=${topic.slug}`}>
+                    <button>{topic.slug.toUpperCase()}</button>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      </>
+    );
   }
 };
 

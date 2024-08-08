@@ -8,6 +8,7 @@ import { FaChevronDown } from "react-icons/fa";
 const Header = () => {
   const { loggedInUser } = useContext(UserContext);
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext);
+
   const navigate = useNavigate();
   function handleClick(e) {
     e.preventDefault();
@@ -54,7 +55,7 @@ const Header = () => {
           <Link to="/login">Login</Link>
         )}
       </nav>
-      <h1> Welcome to NC News !!! {loggedIn ? loggedInUser : null}</h1>
+      <h1> Welcome to NC News !!! {loggedIn ? loggedInUser.username : null}</h1>
     </>
   );
 };

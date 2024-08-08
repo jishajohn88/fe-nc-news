@@ -28,9 +28,8 @@ const ArticlesByTopic = () => {
       <>
         <section className="article-list">
           {articles.map((article) => {
-            return <ArticleList key={article.article_id} article={article}/>
+            return <ArticleList key={article.article_id} article={article} />;
           })}
-    
         </section>
       </>
     );
