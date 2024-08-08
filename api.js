@@ -39,6 +39,17 @@ const getUsers = () => {
 const postComment = (newComment,article_id) => {
   return api.post(`articles/${article_id}/comments`,newComment)
 }
+
+const getTopics = () => {
+  return api.get('/topics').then(({data})=>{
+    return data.topics
+  })
+}
+const getArticlesByTopic = (topic) => {
+  return api.get(`/articles?topic=${topic}`).then(({data})=>{
+    return data.articles
+  })
+}
 export {
   getArticlesByCreateDate,
   getArticleById,
@@ -46,5 +57,7 @@ export {
   updateArticleByIncrementVotes,
   updateArticleByDecrementVotes,
   getUsers,
-  postComment
+  postComment,
+  getTopics,
+  getArticlesByTopic
 };
