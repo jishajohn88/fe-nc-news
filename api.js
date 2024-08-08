@@ -43,12 +43,20 @@ const postComment = (newComment,article_id) => {
 const getTopics = () => {
   return api.get('/topics').then(({data})=>{
     return data.topics
+  }).catch((err)=>{
+    console.log("Is it the error")
   })
 }
 const getArticlesByTopic = (topic) => {
   return api.get(`/articles?topic=${topic}`).then(({data})=>{
     return data.articles
+  }).catch((err) => {
+    console.log(err.response)
+    return err.response
   })
+}
+const deleteCommentById = (comment_id) => {
+  return api.delete(`/comments/${comment_id}`)
 }
 export {
   getArticlesByCreateDate,
@@ -59,5 +67,6 @@ export {
   getUsers,
   postComment,
   getTopics,
-  getArticlesByTopic
+  getArticlesByTopic,
+  deleteCommentById
 };

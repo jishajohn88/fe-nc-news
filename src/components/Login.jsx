@@ -10,7 +10,7 @@ const Login = () => {
   const [isShowing, setIsShowing] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { loggedIn, setLoggedIn } = useContext(LoggedInContext);
+  const { setLoggedIn } = useContext(LoggedInContext);
   const location = useLocation();
   const articleId = location.state;
   const { setLoggedInUser } = useContext(UserContext);
@@ -21,11 +21,11 @@ const Login = () => {
   function handleSubmit(event) {
     event.preventDefault();
     setIsLoading(true);
-    setLoggedInUser(userNameInput);
     getUsers().then((response) => {
       setIsLoading(false);
       response.map((user) => {
         if (user.username === userNameInput) {
+          setLoggedInUser(user);
           setLoggedIn(true);
           setIsShowing(true);
         } else {

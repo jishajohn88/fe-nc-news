@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { postComment } from "../../api";
+import ViewComments from "./ViewComments";
 
 const PostComment = (props) => {
   const { userNameInput, articleId } = props;
@@ -46,6 +47,8 @@ const PostComment = (props) => {
       {isSuccess ? (
         <p className="comment-success">Comment has been posted !!!</p>
       ) : null}
+
+      <ViewComments userNameInput={userNameInput} articleId={articleId} />
     </>
   );
 };

@@ -14,6 +14,9 @@ const SingleArticle = () => {
   const [isLoading, setisLoading] = useState(true);
   const [isShowing, setisShowing] = useState(false);
   const [comments, setComments] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
+
+  const [deleteMsg, setdeleteMsg] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +40,12 @@ const SingleArticle = () => {
     navigate("/login", { state: article_id });
   }
 
+  if (isDeleted) {
+    getCommentsByArticleId(article_id).then((comments) => {
+      setComments(comments);
+      setisLoading(false);
+    });
+  }
   if (isLoading) {
     return <Loading />;
   } else {
@@ -58,6 +67,7 @@ const SingleArticle = () => {
               <VoteHandler singleArticle={singleArticle} />
             </h5>
             <h5>Comments : {singleArticle.comment_count}</h5>
+            <p>{isDeleted ? deleteMsg : null}</p>
           </article>
           <article className="single-article-buttons">
             <button className="view-comments" onClick={handleViewComments}>
@@ -71,7 +81,14 @@ const SingleArticle = () => {
             <section className="comments-container">
               {comments.map((comment) => {
                 return (
-                  <CommentCard key={comment.comment_id} comment={comment} />
+                  <CommentCard
+                    key={comment.comment_id}
+                    comment={comment}
+                    setIsDeleted={setIsDeleted}
+                    deleteMsg={deleteMsg}
+                    isDeleted={isDeleted}
+                    setdeleteMsg={setdeleteMsg}
+                  />
                 );
               })}
             </section>
