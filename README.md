@@ -1,10 +1,10 @@
 # Front End
 
-# Link to the deployed version - https://jishaj-nc-news.netlify.app/
+- Link to the deployed version - https://jishaj-nc-news.netlify.app/
 
 - This is a app which mainly consists of articles which can be grouped by various topics like coding,fottball etc. It also includes features like viewing comments, posting new comments and deleting comments. The user can go into the individual articles and post in their comments and put their votes.
 
-# Link to the back end repo - https://github.com/jishajohn88/be-nc-news
+- Link to the back end repo - https://github.com/jishajohn88/be-nc-news
 
 - Minimum versions required to run Node.js is v22.2.0
 
@@ -22,4 +22,4 @@
 
 6. After that in the terminal type npm run dev
 
-# This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
+- This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
