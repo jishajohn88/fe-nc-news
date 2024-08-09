@@ -4,24 +4,35 @@ import { UserContext } from "../contexts/User";
 import { LoggedInContext } from "../contexts/LoggedUser";
 import { getTopics } from "../../api";
 import { FaChevronDown } from "react-icons/fa";
+import ErrorComponent from "./ErrorComponent";
 
 const Header = () => {
-  const { loggedInUser } = useContext(UserContext);
-  const { loggedIn, setLoggedIn } = useContext(LoggedInContext);
+  const { loggedInUser, isLoggedIn, setLoggedInUser } = useContext(UserContext);
+  const [error, setError] = useState(null);
+  const [checkLoggedIn,setCheckLoggedIn] = useState(false)
 
   const navigate = useNavigate();
   function handleClick(e) {
     e.preventDefault();
-    setLoggedIn(false);
+    setCheckLoggedIn(true)
     navigate("/logout");
+    setLoggedInUser({})
   }
   const [topicsList, setTopicsList] = useState([]);
 
   useEffect(() => {
-    getTopics().then((data) => {
-      setTopicsList(data);
-    });
+    getTopics()
+      .then((data) => {
+        setTopicsList(data);
+      })
+      .catch((err) => {
+        setError(err);
+      });
   }, []);
+
+  if (error) {
+    return <ErrorComponent message={error.message} />;
+  }
 
   return (
     <>
@@ -47,7 +58,7 @@ const Header = () => {
           </section>
         </section>
 
-        {loggedIn ? (
+        {isLoggedIn ? (
           <Link to="/logout" onClick={handleClick}>
             Logout
           </Link>
@@ -55,7 +66,10 @@ const Header = () => {
           <Link to="/login">Login</Link>
         )}
       </nav>
-      <h1> Welcome to NC News !!! {loggedIn ? loggedInUser.username : null}</h1>
+      <h1>
+        {" "}
+        Welcome to NC News !!! {isLoggedIn ? loggedInUser.username : null}    {isLoggedIn? <img className="avatar-img" src={loggedInUser.avatar_url}/> : null}
+      </h1>
     </>
   );
 };

@@ -3,12 +3,14 @@ import {
   updateArticleByDecrementVotes,
   updateArticleByIncrementVotes,
 } from "../../api";
+import ErrorComponent from "./ErrorComponent";
 const VoteHandler = (props) => {
   const { singleArticle } = props;
 
   const [countVotes, setCountVotes] = useState(0);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error,setError] = useState(null)
 
   function handleIncrementVotes() {
     setCountVotes((currVotes) => {
@@ -21,6 +23,7 @@ const VoteHandler = (props) => {
       })
       .catch(() => {
         setIsError(true);
+        setError(err)
         setIsSuccess(false);
         setCountVotes((currVotes) => {
           return currVotes - 1;
@@ -40,11 +43,15 @@ const VoteHandler = (props) => {
       })
       .catch(() => {
         setIsError(true);
+        setError(err)
         setIsSuccess(false);
         setCountVotes((currVotes) => {
           return currVotes + 1;
         });
       });
+  }
+  if(error){
+    return <ErrorComponent message={error.message}/>
   }
   return (
     <>

@@ -1,48 +1,49 @@
 import { useContext, useState } from "react";
 import { getUsers } from "../../api";
-import PostComment from "./PostComment";
 import Loading from "./Loading";
-import { useLocation } from "react-router-dom";
-import { UserContext, UserProvider } from "../contexts/User";
-import { LoggedInContext } from "../contexts/LoggedUser";
+import {useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/User";
 const Login = () => {
   const [userNameInput, setUserNameInput] = useState("");
-  const [isShowing, setIsShowing] = useState(false);
+  const [error, setError] = useState(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { setLoggedIn } = useContext(LoggedInContext);
-  const location = useLocation();
-  const articleId = location.state;
-  const { setLoggedInUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
+  const { setLoggedInUser, isLoggedIn, loggedInUser } = useContext(UserContext);
   function handleChangeUsername(event) {
     setUserNameInput(event.target.value);
   }
 
-  function handleSubmit(event) {
+  function handleClick(event) {
     event.preventDefault();
     setIsLoading(true);
-    getUsers().then((response) => {
-      setIsLoading(false);
-      response.map((user) => {
-        if (user.username === userNameInput) {
-          setLoggedInUser(user);
-          setLoggedIn(true);
-          setIsShowing(true);
-        } else {
-          setIsError(true);
-        }
+    getUsers()
+      .then((response) => {
+        setIsLoading(false);
+        response.map((user) => {
+          if (user.username === userNameInput) {
+            setLoggedInUser(user);
+            navigate("/");
+          } else {
+            setIsError(true);
+          }
+        });
+      })
+      .catch((err) => {
+        setError(err);
       });
-    });
   }
-  if (isShowing) {
-    return <PostComment userNameInput={userNameInput} articleId={articleId} />;
+  if (error) {
+    return <ErrorComponent message={error.message} />;
   }
+
   if (isLoading) {
     return <Loading />;
   } else {
     return (
       <>
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className="login-form">
           {isError ? <p>Login unsuccessful</p> : null}
           <label htmlFor="user-name">Enter your username: </label>
           <input
@@ -52,7 +53,7 @@ const Login = () => {
             onChange={handleChangeUsername}
             value={userNameInput}
           ></input>
-          <button>Login</button>
+          <button onClick={handleClick}>Login</button>
         </form>
       </>
     );

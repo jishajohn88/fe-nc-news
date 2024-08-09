@@ -22,7 +22,7 @@ function App() {
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/logout" element={<LoggedOut/>}></Route>
       </Routes>
-      <Footer />
+  
     </section>
   );
 }

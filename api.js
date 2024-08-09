@@ -7,19 +7,26 @@ const api = axios.create({
 const getArticlesByCreateDate = () => {
   return api.get("articles?sort_by=created_at").then(({ data }) => {
     return data.articles;
+  }).catch((err) => {
+    return err
   });
 };
 
+const getArticles = (sortBy="created_at",order="asc") =>{
+  return api.get("/articles",{params:{sort_by : sortBy,order:order}}).then(({data})=>{
+    return data.articles;
+  })
+}
 const getArticleById = (article_id) => {
   return api.get(`articles/${article_id}`).then(({ data }) => {
     return data.article;
-  });
+  })
 };
 
 const getCommentsByArticleId = (article_id) => {
   return api.get(`articles/${article_id}/comments`).then(({ data }) => {
     return data.comments;
-  });
+  })
 };
 
 const updateArticleByIncrementVotes = (article_id) => {
@@ -37,22 +44,19 @@ const getUsers = () => {
 }
 
 const postComment = (newComment,article_id) => {
-  return api.post(`articles/${article_id}/comments`,newComment)
+  return api.post(`articles/${article_id}/comments`,newComment).then((response) => {
+    return response.data.comment
+  })
 }
 
 const getTopics = () => {
   return api.get('/topics').then(({data})=>{
     return data.topics
-  }).catch((err)=>{
-    console.log("Is it the error")
   })
 }
 const getArticlesByTopic = (topic) => {
   return api.get(`/articles?topic=${topic}`).then(({data})=>{
     return data.articles
-  }).catch((err) => {
-    console.log(err.response)
-    return err.response
   })
 }
 const deleteCommentById = (comment_id) => {
@@ -68,5 +72,6 @@ export {
   postComment,
   getTopics,
   getArticlesByTopic,
-  deleteCommentById
+  deleteCommentById,
+  getArticles
 };

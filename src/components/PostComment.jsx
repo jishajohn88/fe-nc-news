@@ -1,54 +1,59 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { postComment } from "../../api";
 import ViewComments from "./ViewComments";
+import { UserContext } from "../contexts/User";
+import ErrorComponent from "./ErrorComponent";
 
 const PostComment = (props) => {
-  const { userNameInput, articleId } = props;
+  const { article_id, isPosted, setIsPosted, comments, setComments } = props;
   const [commentBody, setCommentBody] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
+  const { loggedInUser} = useContext(UserContext);
+  const [error, setError] = useState(null);
+  const [newComments, setNewComments] = useState({});
 
   function handleSubmit(event) {
     event.preventDefault();
     const newComment = {
-      username: userNameInput,
+      username: loggedInUser.username,
       body: commentBody,
     };
-    postComment(newComment, articleId).then(() => {
-      setIsSuccess(true);
-    });
+    postComment(newComment, article_id)
+      .then((response) => {
+        setIsPosted(!isPosted);
+        setComments((currComments) => {
+          return [response, ...currComments];
+        });
+      })
+      .catch((err) => {
+        setError(err);
+      });
     setCommentBody("");
   }
+
   function handleChangeCommentBody(event) {
     setCommentBody(event.target.value);
   }
+  if (error) {
+    return <ErrorComponent message={error.message} />;
+  }
+
   return (
     <>
-      <h2>Fill in your comments!!</h2>
-      <form className="post-form">
-        <label htmlFor="user-name">Username</label>
-        <input
-          type="text"
-          name="user-name"
-          id="user-name"
-          value={userNameInput}
-          disabled
-        ></input>
-        <label htmlFor="comment-body">Comments</label>
-        <textarea
-          id="comment-body"
-          name="comment-body"
-          rows="4"
-          cols="50"
-          onChange={handleChangeCommentBody}
-          value={commentBody}
-        ></textarea>
-        <button onClick={handleSubmit}>Post my comment</button>
-      </form>
-      {isSuccess ? (
-        <p className="comment-success">Comment has been posted !!!</p>
-      ) : null}
-
-      <ViewComments userNameInput={userNameInput} articleId={articleId} />
+      <section className="post-section">
+        <form className="post-form">
+          <img className="avatar-img" src={loggedInUser.avatar_url} />
+          <textarea
+            id="comment-body"
+            name="comment-body"
+            rows="4"
+            cols="10"
+            onChange={handleChangeCommentBody}
+            value={commentBody}
+            placeholder="Write something here..."
+          ></textarea>
+          <button onClick={handleSubmit}>Post</button>
+        </form>
+      </section>
     </>
   );
 };

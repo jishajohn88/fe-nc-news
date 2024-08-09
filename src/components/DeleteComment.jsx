@@ -3,25 +3,44 @@ import { UserContext } from "../contexts/User";
 import { deleteCommentById } from "../../api";
 
 const DeleteComment = (props) => {
-  const { comment, setIsDeleted, setdeleteMsg, isDeleted, deleteMsg } = props;
+  const {
+    comment,
+    setdeleteMsg,
+    isDeleted,
+    deleteMsg,
+    setComments,
+    comments,
+  } = props;
+
   const { loggedInUser } = useContext(UserContext);
+  const [currentId,setCurrentId] = useState(null)
   function handleClick(event) {
     event.preventDefault();
-    setIsDeleted(true);
-
-    deleteCommentById(comment.comment_id).then((response) => {
-      setdeleteMsg("Comment has been deleted !!!");
-    });
+    setCurrentId(comment.comment_id)
+    deleteCommentById(comment.comment_id)
+      .then((response) => {
+        setdeleteMsg("Deleting comment !!!");
+        setTimeout(() => {
+          setComments((currComment) => {
+            return currComment.filter((commentObject) => commentObject.comment_id !== comment.comment_id )
+          })
+        },1000)
+       
+      })
+      .catch((err) => {
+        setdeleteMsg("Error deleting comment")
+      });
   }
-  return (
-    <>
-      {comment.author === loggedInUser.username ? (
-        <button className="delete-comment" onClick={handleClick}>
+  if(comment.author === loggedInUser.username){
+    return (
+      <>
+      <p>{currentId === comment.comment_id ? deleteMsg : null}</p>
+      <button className="delete-comment" onClick={handleClick}>
           Delete my comment
         </button>
-      ) : null}
-    </>
-  );
+      </>
+    )
+  }
 };
 
 export default DeleteComment;
