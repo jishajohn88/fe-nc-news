@@ -103,14 +103,14 @@ h5 {
   background-color: #242424;
   font-size: x-large;
 }
-.single-article-buttons {
+.single-article-buttons, .footer-buttons {
   display: flex;
   width: 100%;
   gap: 1rem;
   margin: auto;
 }
 .view-comments,
-.post-comment, .delete-comment {
+.post-comment, .delete-comment,.previous-button,.next-button {
   padding: 10px;
   border-radius: 10px;
   background-color: #8fc93a;

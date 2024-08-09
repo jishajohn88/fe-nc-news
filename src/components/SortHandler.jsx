@@ -4,16 +4,17 @@ import { getArticles } from "../../api";
 import ErrorComponent from "./ErrorComponent";
 import ArticleList from "./ArticleList";
 import Loading from "./Loading";
+import Footer from "./Footer";
 
 const SortHandler = () => {
   const [isLoading, setisLoading] = useState(true);
   const [sortSelect, setSortSelect] = useState("created_at");
   const [orderSelect, setOrderSelect] = useState("asc");
   const [sortArticles, setSortArticles] = useState([]);
-  const [order, setOrder] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchParamsForOrder, setSearchParamsForOrder] = useSearchParams();
   const [error, setError] = useState(null);
+  const [totalCount, setTotalCount] = useState(null);
 
   const handleSortSelectchange = (e) => {
     const sortValue = e.target.value;
@@ -26,19 +27,23 @@ const SortHandler = () => {
     setSearchParamsForOrder({ order: orderValue });
     setOrderSelect(orderValue);
   };
+
+  const query = searchParams.get("sort_by");
+  const orderQuery = searchParamsForOrder.get("order");
   useEffect(() => {
-    const query = searchParams.get("sort_by");
-    const orderQuery = searchParamsForOrder.get("order");
     setisLoading(true);
     getArticles(query, orderQuery)
       .then((data) => {
-        setSortArticles(data);
+        setSortArticles(data.articles);
+        setTotalCount(data.total_count);
         setisLoading(false);
       })
       .catch((err) => {
         setError(err);
       });
-  }, [searchParams, searchParamsForOrder]);
+  }, [query, orderQuery]);
+
+  console.log(query, orderQuery);
   if (error) {
     return <ErrorComponent message={error.message} />;
   }
@@ -76,6 +81,12 @@ const SortHandler = () => {
             return <ArticleList key={article.article_id} article={article} />;
           })}
         </section>
+        <Footer
+          totalCount={totalCount}
+          setSortArticles={setSortArticles}
+          query={query}
+          orderQuery={orderQuery}
+        />
       </>
     );
   }
