@@ -1,14 +1,14 @@
-# React + Vite
+# Front End
 
 # Link to the deployed version - https://jishaj-nc-news.netlify.app/
 
-# This is a app which mainly consists of articles which can be grouped by various topics like coding,fottball etc. It also includes features like viewing comments, posting new comments and deleting comments. The user can go into the individual articles and post in their comments and put their votes.
+- This is a app which mainly consists of articles which can be grouped by various topics like coding,fottball etc. It also includes features like viewing comments, posting new comments and deleting comments. The user can go into the individual articles and post in their comments and put their votes.
 
 # Link to the back end repo - https://github.com/jishajohn88/be-nc-news
 
-# Minimum versions required to run Node.js is v22.2.0
+- Minimum versions required to run Node.js is v22.2.0
 
-# To run the project locally follow the below steps:
+- To run the project locally follow the below steps:
 
 1. Login into Github
 
