@@ -3,11 +3,11 @@ import Homepage from "./components/Homepage";
 import "./App.css";
 import Header from "./components/Header";
 import SingleArticle from "./components/SingleArticle";
-import Footer from "./components/Footer";
 import Login from "./components/Login";
 import LoggedOut from "./components/LoggedOut";
 import Topics from "./components/Topics";
 import ArticlesByTopic from "./components/ArticlesByTopic";
+import NotFoundPage from "./components/NotFound";
 
 function App() {
 
@@ -21,8 +21,8 @@ function App() {
         <Route path="/articles" element={<ArticlesByTopic/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/logout" element={<LoggedOut/>}></Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-  
     </section>
   );
 }
