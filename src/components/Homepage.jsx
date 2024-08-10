@@ -1,9 +1,11 @@
+import ArticlesProvider from "./ArticlesProvider";
 import SortHandler from "./SortHandler";
 
 const Homepage = () => {
   return(
     <>
-    <SortHandler/>
+
+<ArticlesProvider/>
     </>
   )
 };

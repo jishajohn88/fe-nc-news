@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/User";
-import { LoggedInContext } from "../contexts/LoggedUser";
 import { getTopics } from "../../api";
 import { FaChevronDown } from "react-icons/fa";
 import ErrorComponent from "./ErrorComponent";
@@ -9,12 +8,10 @@ import ErrorComponent from "./ErrorComponent";
 const Header = () => {
   const { loggedInUser, isLoggedIn, setLoggedInUser } = useContext(UserContext);
   const [error, setError] = useState(null);
-  const [checkLoggedIn,setCheckLoggedIn] = useState(false)
 
   const navigate = useNavigate();
   function handleClick(e) {
     e.preventDefault();
-    setCheckLoggedIn(true)
     navigate("/logout");
     setLoggedInUser({})
   }
