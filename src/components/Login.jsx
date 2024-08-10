@@ -10,7 +10,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
-  const { setLoggedInUser, isLoggedIn, loggedInUser } = useContext(UserContext);
+  const { setLoggedInUser} = useContext(UserContext);
   function handleChangeUsername(event) {
     setUserNameInput(event.target.value);
   }

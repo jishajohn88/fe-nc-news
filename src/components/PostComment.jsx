@@ -1,15 +1,14 @@
 import { useContext, useState } from "react";
 import { postComment } from "../../api";
-import ViewComments from "./ViewComments";
 import { UserContext } from "../contexts/User";
 import ErrorComponent from "./ErrorComponent";
 
 const PostComment = (props) => {
-  const { article_id, isPosted, setIsPosted, comments, setComments } = props;
+  const { article_id, setComments } = props;
   const [commentBody, setCommentBody] = useState("");
   const { loggedInUser} = useContext(UserContext);
   const [error, setError] = useState(null);
-  const [newComments, setNewComments] = useState({});
+  const [isPosted, setIsPosted] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();

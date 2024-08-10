@@ -1,18 +1,24 @@
 import moment from "moment";
-import { Link } from "react-router-dom";
+import VoteHandler from "./VoteHandler";
 const ArticleCard = (props) => {
-  const { article } = props;
+  const { singleArticle } = props;
   return (
     <>
-      <section className="article-card">
-        <Link to={`/articles/${article.article_id}`}>
-          <img src={article.article_img_url} />
-          <h3>{article.title}</h3>
-          <h4>{moment(article.created_at).format("ll")}</h4>
-          <h4>Votes : {article.votes}</h4>
-          <h4>Comment_Count : {article.comment_count}</h4>
-        </Link>
-      </section>
+      <article className="single-article-heading">
+        <h2>{singleArticle.title}</h2>
+        <img src={singleArticle.article_img_url} />
+      </article>
+      <article className="single-article-additional-info">
+        <h3>
+          Created on : {moment(singleArticle.created_at).format("MMMM Do YYYY")}
+        </h3>
+        <h4 className="single-article-topic">{singleArticle.topic}</h4>
+        <p>{singleArticle.body}</p>
+        <h5>
+          <VoteHandler singleArticle={singleArticle} />
+        </h5>
+        <h5>Comments : {singleArticle.comment_count}</h5>
+      </article>
     </>
   );
 };
