@@ -10,20 +10,22 @@ const ArticlesByTopic = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const topicNameQuery = searchParams.get("topic");
   const [articles, setArticles] = useState([]);
-  const [error,setError] = useState(null)
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
-    getArticlesByTopic(topicNameQuery).then((data) => {
-      setIsLoading(false);
-      setArticles(data);
-    }).catch((err)=>{
-      setError(err)
-    });
+    getArticlesByTopic(topicNameQuery)
+      .then((data) => {
+        setIsLoading(false);
+        setArticles(data);
+      })
+      .catch((err) => {
+        setError(err);
+      });
   }, [topicNameQuery]);
 
-  if(error){
-    return <ErrorComponent message={error.message}/>
+  if (error) {
+    return <ErrorComponent message={error.message} />;
   }
 
   if (isLoading) {
@@ -32,9 +34,7 @@ const ArticlesByTopic = () => {
     return (
       <>
         <section className="article-list">
-          {articles.map((article) => {
-            return <ArticleList key={article.article_id} article={article} />;
-          })}
+          <ArticleList articles={articles} />
         </section>
       </>
     );
