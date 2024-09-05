@@ -1,11 +1,23 @@
+import Lottie from "react-lottie";
+import error from "../assets/error.json";
 const NotFoundPage = () => {
-    return(
-        <>
-        <section className="error-section">
-        <h1>Page Not Found !!!</h1>
-        </section>
-        </>
-    )
-}
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: error,
+  };
 
-export default NotFoundPage
+  return (
+    <>
+      <section className="error-section">
+        <Lottie options={defaultOptions} height={400} width={400} />
+        <a href="/">
+          <p>Return to Home Page</p>
+        </a>
+      </section>
+      {/* <p>{message}</p> */}
+    </>
+  );
+};
+
+export default NotFoundPage;

@@ -12,7 +12,7 @@ const DeleteComment = (props) => {
     event.preventDefault();
     setCurrentId(comment.comment_id);
     deleteCommentById(comment.comment_id)
-      .then((response) => {
+      .then(() => {
         setDeleteMessage("Deleting comment !!!");
         setTimeout(() => {
           setComments((currComment) => {

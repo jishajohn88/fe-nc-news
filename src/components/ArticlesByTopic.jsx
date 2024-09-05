@@ -4,6 +4,7 @@ import { getArticlesByTopic } from "../../api";
 import Loading from "./Loading";
 import ArticleList from "./ArticleList";
 import ErrorComponent from "./ErrorComponent";
+import Header from "./Header";
 
 const ArticlesByTopic = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +34,7 @@ const ArticlesByTopic = () => {
   } else {
     return (
       <>
+      <Header/>
         <section className="article-list">
           <ArticleList articles={articles} />
         </section>

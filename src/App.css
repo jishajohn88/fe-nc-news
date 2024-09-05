@@ -10,7 +10,7 @@ body {
   font-size: x-large;
   text-align: right;
   margin: 10px;
-  display:flex;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: end;
@@ -103,7 +103,8 @@ h5 {
   background-color: #242424;
   font-size: x-large;
 }
-.single-article-buttons, .footer-buttons {
+.single-article-buttons,
+.footer-buttons {
   display: flex;
   width: 100%;
   gap: 1rem;
@@ -113,7 +114,10 @@ h5 {
   justify-content: center;
 }
 .view-comments,
-.post-comment, .delete-comment,.previous-button,.next-button {
+.post-comment,
+.delete-comment,
+.previous-button,
+.next-button {
   padding: 10px;
   border-radius: 10px;
   background-color: #8fc93a;
@@ -166,33 +170,32 @@ h5 {
   }
 }
 .vote-success,
-.vote-unsuccess{
+.vote-unsuccess {
   margin-top: 10px;
   width: 300px;
   background-color: #d5d6aa;
   color: #333333;
   font-size: medium;
 }
-.post-section{
-
-  display:flex;
+.post-section {
+  display: flex;
   flex-direction: row;
-  width:100%;
+  width: 100%;
 }
 .post-form {
-  display:flex;
+  display: flex;
   flex-direction: row;
-  gap:1rem;
+  gap: 1rem;
   margin-top: 20px;
-  width:100%;
-  img{
-    margin:auto;
+  width: 100%;
+  img {
+    margin: auto;
   }
   textarea {
     width: 100%;
     height: 8vh;
     padding: 20px;
-    margin-bottom: 10px;;
+    margin-bottom: 10px;
   }
   button {
     padding: 6px;
@@ -202,7 +205,7 @@ h5 {
     font-size: medium;
     font-weight: bolder;
     cursor: pointer;
-    margin:auto;
+    margin: auto;
     background-color: #8fc93a;
     font-size: medium;
     font-weight: normal;
@@ -213,43 +216,44 @@ h5 {
   font-size: x-large;
 }
 .comments-container {
-  width:-webkit-fill-available;
+  width: -webkit-fill-available;
+  font-size: small;
 }
-.topics-list{
-   display:flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   border:none;
-   max-width:65vw;
-   margin:auto;
-   max-height: fit-content;
-   background-color: #f3f8f2;
+.topics-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  max-width: 65vw;
+  margin: auto;
+  max-height: fit-content;
+  background-color: #f3f8f2;
 
-   ul{
+  ul {
     list-style-type: none;
-   }
-   button{
-    padding:40px;
+  }
+  button {
+    padding: 40px;
     background-color: #70c1b3;
-    margin:20px;
-    border-radius: 30px;;
+    margin: 20px;
+    border-radius: 30px;
     cursor: pointer;
-    font-size:x-large;
-    font-weight:bold;
-    width:60vw;
-    border:none;
-   }
+    font-size: x-large;
+    font-weight: bold;
+    width: 60vw;
+    border: none;
+  }
 }
 @media screen and (max-width: 600px) {
-  .topics-list{
-    max-width: 80vw;;
+  .topics-list {
+    max-width: 80vw;
   }
-  
 }
 
-.topic-btn, .topic-content{
-  font-size: inherit;  
+.topic-btn,
+.topic-content {
+  font-size: inherit;
   border: none;
   outline: none;
   color: white;
@@ -258,67 +262,66 @@ h5 {
   font-family: inherit;
   margin: 0;
 }
-.topic-content{
+.topic-content {
   display: none;
   position: absolute;
   background-color: #242424;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   min-height: fit-content;
   position: absolute;
-  right:85px;
+  right: 85px;
   border-radius: 5px;
-  li{
+  li {
     list-style-type: none;
   }
-  p{
+  p {
     font-size: large;
     text-align: center;
   }
-  
 }
-.topic-content a{
+.topic-content a {
   float: none;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
   text-align: left;
 }
-.topic-btn:hover .topic-content{
+.topic-btn:hover .topic-content {
   display: block;
-
 }
-#toggle-icon{
+#toggle-icon {
   position: relative;
-  top:6px;
+  top: 6px;
 }
-.sort-form{
+.sort-form {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-#sort-select,#order-select{
-  margin:auto;
-  border:1px solid green;
+#sort-select,
+#order-select {
+  margin: auto;
+  border: 1px solid green;
   font-size: larger;
   border-radius: 10px;
-  padding:6px;
+  padding: 6px;
 }
-.avatar-img{
-  width:40px;
+.avatar-img {
+  width: 40px;
   height: 30px;
   border-radius: 50%;
 }
 .error-section {
-  display: flex;
-  flex-direction: column;
   margin: auto;
-  align-items: center;
-  justify-content: center;
-  width:400px;
-  height: 500px;;
-  border: 1px solid white;
-  box-shadow: 5px 5px 5px #eee5e9;
+  margin-top: 10em;
+  text-align: center;
+  width: 692px;
+  height: 500px;
   font-size: x-large;
+  img {
+    width: auto;
+    height: auto;
+  }
 }

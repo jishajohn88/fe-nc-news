@@ -1,15 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById, getCommentsByArticleId } from "../../api";
+import { getArticleById } from "../../api";
 import Loading from "./Loading";
 import ScrollToTop from "react-scroll-to-top";
-import Expandable from "./Expandable";
-import Login from "./Login";
-import { UserContext } from "../contexts/User";
 import ErrorComponent from "./ErrorComponent";
-import CommentsSection from "./CommentSection";
 import ArticleCard from "./ArticleCard";
 import ViewComments from "./ViewComments";
+import Header from "./Header";
 
 const SingleArticle = () => {
   const [singleArticle, setSingleArticle] = useState({});
@@ -38,6 +35,7 @@ const SingleArticle = () => {
   } else {
     return (
       <>
+        <Header />
         <section className="single-article">
           <ArticleCard singleArticle={singleArticle} />
           <ViewComments article_id={article_id} />

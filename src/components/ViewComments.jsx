@@ -1,11 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/User";
 import Expandable from "./Expandable";
-import CommentCard from "./CommentCard";
 import { getCommentsByArticleId } from "../../api";
 import ErrorComponent from "./ErrorComponent";
-import Login from "./Login";
-import Loading from "./Loading";
 import CommentsSection from "./CommentSection";
 import { useNavigate } from "react-router-dom";
 

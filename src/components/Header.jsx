@@ -7,13 +7,12 @@ import ErrorComponent from "./ErrorComponent";
 
 const Header = () => {
   const { loggedInUser, isLoggedIn, setLoggedInUser } = useContext(UserContext);
-  const [error, setError] = useState(null);
-
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   function handleClick(e) {
     e.preventDefault();
     navigate("/logout");
-    setLoggedInUser({})
+    setLoggedInUser({});
   }
   const [topicsList, setTopicsList] = useState([]);
 
@@ -34,7 +33,7 @@ const Header = () => {
   return (
     <>
       <nav className="nav-section">
-        <Link to="/">Home</Link>
+        <a href="/">Home</a>
         <section className="topic-btn">
           <Link to="/topics">
             All Topics{" "}
@@ -65,7 +64,10 @@ const Header = () => {
       </nav>
       <h1>
         {" "}
-        Welcome to NC News !!! {isLoggedIn ? loggedInUser.username : null}    {isLoggedIn? <img className="avatar-img" src={loggedInUser.avatar_url}/> : null}
+        Welcome to NC News !!! {isLoggedIn ? loggedInUser.username : null}{" "}
+        {isLoggedIn ? (
+          <img className="avatar-img" src={loggedInUser.avatar_url} />
+        ) : null}
       </h1>
     </>
   );

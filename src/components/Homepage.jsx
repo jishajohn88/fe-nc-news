@@ -1,13 +1,10 @@
 import ArticlesProvider from "./ArticlesProvider";
-import SortHandler from "./SortHandler";
-
 const Homepage = () => {
-  return(
+  return (
     <>
-
-<ArticlesProvider/>
+      <ArticlesProvider />
     </>
-  )
+  );
 };
 
 export default Homepage;

@@ -1,26 +1,16 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { getArticles } from "../../api";
-import ErrorComponent from "./ErrorComponent";
-import ArticleList from "./ArticleList";
-import Loading from "./Loading";
-
 const SortHandler = (props) => {
   const { searchParams, setSearchParams } = props;
-  const [sortSelect, setSortSelect] = useState("created_at");
-  const [orderSelect, setOrderSelect] = useState("asc");
   const additionalParams = new URLSearchParams(searchParams);
-
   const handleSortSelectchange = (e) => {
+    e.preventDefault();
     const sortValue = e.target.value;
     setSearchParams({ sort_by: sortValue });
-    setSortSelect(sortValue);
   };
 
   const handleOrderSelectChange = (e) => {
+    e.preventDefault();
     const orderValue = e.target.value;
     setSearchParams({ order: orderValue });
-    setOrderSelect(orderValue);
     additionalParams.set("order", orderValue);
     setSearchParams(additionalParams);
   };
@@ -39,18 +29,18 @@ const SortHandler = (props) => {
       <form className="sort-form" onSubmit={handleSubmit}>
         <select
           id="sort-select"
-          value={sortSelect}
+          value={searchParams.get("sort_by") || ""}
           onChange={handleSortSelectchange}
         >
           <option value="created_at">Date</option>
-          <option value="comment_count">Comment_Count</option>
+          <option value="comment_count">Comment Count</option>
           <option value="votes">Votes</option>
           <option value="title">Title</option>
           <option value="author">Author</option>
         </select>
         <select
           id="order-select"
-          value={orderSelect}
+          value={searchParams.get("order") || ""}
           onChange={handleOrderSelectChange}
         >
           <option value="asc" onClick={() => setSortOrder("asc")}>
